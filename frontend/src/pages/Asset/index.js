@@ -1,13 +1,23 @@
 import React from 'react';
 import './style.css';
 import NavegationBar from '../../components/NavegationBar';
+import Sidebar from '../../components/Sidebar';
 
 function Asset() {
+	const routes = [
+		{path: "/assets/products/", name: "Produtos"},
+		{path: "/assets/sellers/", name: "Sellers"},
+		{path: "/assets/categories/", name: "Categories"},
+	];
 	return (
 		<div className="asset">	
 			<header>
 				<NavegationBar/>
 			</header>
+			<Sidebar routes={routes}/>
+
+			<div className="content">
+			</div>
 		</div>
 	);
 }

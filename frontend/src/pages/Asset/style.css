@@ -1,0 +1,26 @@
+.asset {
+    margin-top: 56px;
+    width: 100%;
+    height: 100%;
+
+}
+
+header {
+}
+
+.content {
+    font-family: 'Abel', sans-serif;
+    font-size: 18pt;
+    border-radius: 8px;
+    
+    width: 100%;
+    background-color: #fff;
+    max-width: 1120px;
+    height: 600px;
+    margin: 0 auto;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
