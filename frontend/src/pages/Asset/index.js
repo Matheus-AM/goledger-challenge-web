@@ -1,11 +1,13 @@
 import React from 'react';
-
 import './style.css';
+import NavegationBar from '../../components/NavegationBar';
 
 function Asset() {
 	return (
 		<div className="asset">	
-			
+			<header>
+				<NavegationBar/>
+			</header>
 		</div>
 	);
 }

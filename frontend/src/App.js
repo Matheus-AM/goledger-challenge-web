@@ -3,9 +3,7 @@ import {BrowserRouter, Switch, Route} from 'react-router-dom';
 
 import Main from './pages/Main';
 import Transaction from './pages/Transaction';
-import Category from './pages/Category';
-import Product from './pages/Product';
-import Seller from './pages/Seller';
+import Asset from './pages/Asset';
 
 import './global.css';
 
@@ -14,10 +12,8 @@ function App() {
     <BrowserRouter>
       <Switch>
         <Route path="/" exact component={Main} />
-        <Route path="/transaction" component={Transaction} />
-        <Route path="/asset/category" component={Category} />
-        <Route path="/asset/product" component={Product} />
-        <Route path="/asset/seller" component={Seller} />
+        <Route path="/transactions" component={Transaction} />
+        <Route path="/assets" component={Asset} />
       </Switch>
     </BrowserRouter>
   );
