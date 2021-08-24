@@ -5,22 +5,29 @@
 
 }
 
-header {
+.page {
+    font-size: 18pt;
+    background-color: #fff;
+    width: 1300px;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    margin-left: 200px;
+    height: 100%;
 }
 
 .content {
-    font-family: 'Abel', sans-serif;
-    font-size: 18pt;
-    border-radius: 8px;
-    
-    width: 100%;
-    background-color: #fff;
-    max-width: 1120px;
+    box-sizing: border-box;
+    width: 1200px;
     height: 600px;
-    margin: 0 auto;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: auto;
+    margin-bottom: 55px;
+    font-family: 'Abel', sans-serif;
+    border-radius: 8px;
     box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
+

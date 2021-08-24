@@ -1,23 +1,37 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './style.css';
 import NavegationBar from '../../components/NavegationBar';
 import Sidebar from '../../components/Sidebar';
 
+import api from '../../services/api';
+
+
+
 function Asset() {
+
 	const routes = [
 		{path: "/assets/products/", name: "Produtos"},
 		{path: "/assets/sellers/", name: "Sellers"},
 		{path: "/assets/categories/", name: "Categories"},
 	];
+
+	async function aaaa() {
+		return console.log(await (await api.get('query/getSchema')).data)
+	}
+
+
 	return (
-		<div className="asset">	
+		<div className="asset" onLoad={aaaa()} >	
 			<header>
 				<NavegationBar/>
 			</header>
 			<Sidebar routes={routes}/>
-
-			<div className="content">
+			<div className="page">
+				<div className="content">
+					<button>clica em mim</button>
+				</div>
 			</div>
+
 		</div>
 	);
 }
