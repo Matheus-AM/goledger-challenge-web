@@ -1,4 +1,4 @@
-import { AppBar, Button, FormControlLabel, FormGroup, IconButton, makeStyles, Menu, MenuItem, Switch, Toolbar, Typography } from '@material-ui/core';
+import { AppBar, Button, IconButton, makeStyles, Menu, MenuItem, Toolbar, Typography } from '@material-ui/core';
 import React from 'react';
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
@@ -10,6 +10,9 @@ const useStyles = makeStyles((theme) => ({
   },
   menuButton: {
     marginRight: theme.spacing(2),
+  },
+  appBar: {
+    zIndex: theme.zIndex.drawer + 1,
   },
   title: {
     marginLeft: theme.spacing(6),
@@ -44,7 +47,7 @@ function NavBar() {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar className={classes.appBar}>
         <Toolbar>
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
             <MenuIcon />
