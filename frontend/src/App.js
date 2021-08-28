@@ -4,6 +4,7 @@ import { createTheme, makeStyles } from '@material-ui/core/styles';
 import purple from '@material-ui/core/colors/purple';
 import green from '@material-ui/core/colors/green';
 import Main from "./pages/Main.js";
+import BaseLayout from "./layout/BaseLayout.js";
 
 const useStyles = makeStyles({
   root: {
@@ -28,6 +29,7 @@ function App() {
   const classes = useStyles();
   return (
     <ThemeProvider theme={theme}>
+      <BaseLayout />
       <Main />
     </ThemeProvider>
   );
