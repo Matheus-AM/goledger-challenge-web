@@ -16,7 +16,6 @@ function Asset() {
 	];
 
 	async function aaaa() {
-		return console.log(await (await api.get('query/getSchema')).data)
 	}
 
 

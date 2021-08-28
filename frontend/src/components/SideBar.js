@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { alpha, makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
@@ -7,8 +7,9 @@ import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
+import AddBoxIcon from '@material-ui/icons/AddBox';
+import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
 
 const drawerWidth = 240;
 
@@ -28,40 +29,49 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function SideBar() {
-    const classes = useStyles();
+function SideBar(props) {
+  const classes = useStyles();
 
-    return (
-      <div className={classes.root}>
-        <Drawer
-          className={classes.drawer}
-          variant="persistent"
-          open={true}
-          classes={{
-            paper: classes.drawerPaper,
-          }}
-        >
-          <Toolbar />
-          <div className={classes.drawerContainer}>
-            <List>
-              {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                <ListItem button key={text}>
-                  <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                  <ListItemText primary={text} />
-                </ListItem>
-              ))}
-            </List>
-            <Divider />
-            <List>
-              {['All mail', 'Trash', 'Spam'].map((text, index) => (
-                <ListItem button key={text}>
-                  <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                  <ListItemText primary={text} />
-                </ListItem>
-              ))}
-            </List>
-          </div>
-        </Drawer>
+  return (
+    <div className={classes.root}>
+      <Drawer
+        className={classes.drawer}
+        variant="persistent"
+        open={props.side}
+        classes={{
+          paper: classes.drawerPaper,
+        }}
+      >
+        <Toolbar />
+        <div className={classes.drawerContainer}>
+          <List>
+            {['Add Artist', 'Add Album', 'Add Streaming'].map((text, index) => (
+              <ListItem button key={text}>
+                <ListItemIcon><AddBoxIcon /></ListItemIcon>
+                <ListItemText primary={text} />
+              </ListItem>
+            ))}
+          </List>
+          <Divider />
+          <List>
+            {['Edit Artist', 'Edit Album', 'Edit Streaming'].map((text, index) => (
+              <ListItem button key={text}>
+                <ListItemIcon><EditIcon /></ListItemIcon>
+                <ListItemText primary={text} />
+              </ListItem>
+            ))}
+          </List>
+          <Divider />
+          <List>
+            {['Delete Artist', 'Delete Album', 'Delete Streaming'].map((text, index) => (
+              <ListItem button key={text}>
+                <ListItemIcon><DeleteIcon /></ListItemIcon>
+                <ListItemText primary={text} />
+              </ListItem>
+            ))}
+          </List>
+        </div>
+      </Drawer>
     </div>
   );
 }

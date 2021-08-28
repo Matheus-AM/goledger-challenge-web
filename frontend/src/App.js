@@ -1,8 +1,6 @@
 import React from "react";
 import { ThemeProvider} from "@material-ui/core";
 import { createTheme, makeStyles } from '@material-ui/core/styles';
-import purple from '@material-ui/core/colors/purple';
-import green from '@material-ui/core/colors/green';
 import Main from "./pages/Main.js";
 import BaseLayout from "./layout/BaseLayout.js";
 
@@ -18,11 +16,14 @@ function App() {
   const theme = createTheme({
     palette: {
       primary: {
-        main: purple[500],
+        main: "#4267B2",
       },
       secondary: {
-        main: green[500],
+        main: "#34495E",
       },
+      background: {
+        paper: "#ECF0F1",
+      }
     },
   });
   
