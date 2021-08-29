@@ -45,27 +45,39 @@ function SideBar(props) {
         <Toolbar />
         <div className={classes.drawerContainer}>
           <List>
-            {['Add Artist', 'Add Album', 'Add Streaming'].map((text, index) => (
+            <ListItem>
+              <ListItemIcon><AddBoxIcon /></ListItemIcon>
+              <ListItemText primary={'Add'} />
+            </ListItem>
+          <Divider />
+            {['Artist', 'Album', 'Streaming'].map((text, index) => (
               <ListItem button key={text}>
-                <ListItemIcon><AddBoxIcon /></ListItemIcon>
                 <ListItemText primary={text} />
               </ListItem>
             ))}
           </List>
           <Divider />
           <List>
-            {['Edit Artist', 'Edit Album', 'Edit Streaming'].map((text, index) => (
+          <ListItem>
+              <ListItemIcon><EditIcon /></ListItemIcon>
+              <ListItemText primary={'Edit'} />
+            </ListItem>
+          <Divider />
+            {['Artist', 'Album', 'Streaming'].map((text, index) => (
               <ListItem button key={text}>
-                <ListItemIcon><EditIcon /></ListItemIcon>
                 <ListItemText primary={text} />
               </ListItem>
             ))}
           </List>
           <Divider />
           <List>
-            {['Delete Artist', 'Delete Album', 'Delete Streaming'].map((text, index) => (
+          <ListItem>
+              <ListItemIcon><DeleteIcon /></ListItemIcon>
+              <ListItemText primary={'Delete'} />
+            </ListItem>
+            <Divider />
+            {['Artist', 'Album', 'Streaming'].map((text, index) => (
               <ListItem button key={text}>
-                <ListItemIcon><DeleteIcon /></ListItemIcon>
                 <ListItemText primary={text} />
               </ListItem>
             ))}

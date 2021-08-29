@@ -1,8 +1,15 @@
 import React from "react";
-import { ThemeProvider} from "@material-ui/core";
+import { ThemeProvider } from "@material-ui/core";
 import { createTheme, makeStyles } from '@material-ui/core/styles';
 import Main from "./pages/Main.js";
 import BaseLayout from "./layout/BaseLayout.js";
+import Modify from "./pages/Modify.js";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
+
 
 const useStyles = makeStyles({
   root: {
@@ -26,12 +33,21 @@ function App() {
       }
     },
   });
-  
+
   const classes = useStyles();
   return (
     <ThemeProvider theme={theme}>
-      <BaseLayout />
-      <Main />
+      <Router>
+        <BaseLayout />
+        <Switch>
+          <Route exact path="/">
+            <Main />
+          </Route>
+          <Route path="/edit">
+            <Modify />
+          </Route>
+        </Switch>
+      </Router>
     </ThemeProvider>
   );
 }
