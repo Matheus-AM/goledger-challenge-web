@@ -31,7 +31,6 @@ function AlbumCard(props) {
     useEffect(()=>{
         if(props.streamings) setStreamings(props.streamings);
     }, [props.streamings])
-    
     return (
         <>
             {props.album ? (
@@ -56,11 +55,13 @@ function AlbumCard(props) {
                         <Typography>
                             <b>Streaming plataforms:</b>
                         </Typography>
-                        {streamings.map((s, index)=>(
+                        {streamings.map((s, index)=>{return s ? (
+                        
                         <Typography key={index}>
+                        {console.log(s)}
                             {s.name}
                         </Typography>
-                        ))}
+                        ) : (<></>)}) }
                         
                     </CardContent>
                     <CardActions>
