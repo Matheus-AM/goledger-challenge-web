@@ -7,10 +7,9 @@ import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import AddBoxIcon from '@material-ui/icons/AddBox';
-import DeleteIcon from '@material-ui/icons/Delete';
-import EditIcon from '@material-ui/icons/Edit';
-
+import AlbumIcon from '@material-ui/icons/Album';
+import AddBoxOutlinedIcon from '@material-ui/icons/AddBoxOutlined';
+import { Link } from '@material-ui/core';
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -27,6 +26,9 @@ const useStyles = makeStyles((theme) => ({
   drawerContainer: {
     overflow: 'auto',
   },
+  link: {
+    color: theme.palette.text.primary,
+  }
 }));
 
 function SideBar(props) {
@@ -45,42 +47,22 @@ function SideBar(props) {
         <Toolbar />
         <div className={classes.drawerContainer}>
           <List>
-            <ListItem>
-              <ListItemIcon><AddBoxIcon /></ListItemIcon>
-              <ListItemText primary={'Add'} />
-            </ListItem>
-          <Divider />
-            {['Artist', 'Album', 'Streaming'].map((text, index) => (
-              <ListItem button key={text}>
-                <ListItemText primary={text} />
+            <Link underline='none' href="/" className={classes.link} >
+              <ListItem button >
+
+                <ListItemIcon><AlbumIcon /></ListItemIcon>
+                <ListItemText primary={'Albums'} />
               </ListItem>
-            ))}
-          </List>
-          <Divider />
-          <List>
-          <ListItem>
-              <ListItemIcon><EditIcon /></ListItemIcon>
-              <ListItemText primary={'Edit'} />
-            </ListItem>
-          <Divider />
-            {['Artist', 'Album', 'Streaming'].map((text, index) => (
-              <ListItem button key={text}>
-                <ListItemText primary={text} />
-              </ListItem>
-            ))}
-          </List>
-          <Divider />
-          <List>
-          <ListItem>
-              <ListItemIcon><DeleteIcon /></ListItemIcon>
-              <ListItemText primary={'Delete'} />
-            </ListItem>
+            </Link>
             <Divider />
-            {['Artist', 'Album', 'Streaming'].map((text, index) => (
-              <ListItem button key={text}>
-                <ListItemText primary={text} />
+            <Link underline='none' href="/edit" className={classes.link} >
+
+              <ListItem button >
+                <ListItemIcon><AddBoxOutlinedIcon /></ListItemIcon>
+                <ListItemText primary={'Edit Page'} />
               </ListItem>
-            ))}
+            </Link>
+            <Divider />
           </List>
         </div>
       </Drawer>

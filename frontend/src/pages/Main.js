@@ -8,14 +8,14 @@ const useStyles = makeStyles((theme) => ({
   root: {
     height: '100hv',
     width: '100hv',
-    background: theme.palette.primary.main,
+    background: 'linear-gradient(45deg, #34495E 10%, #4267B2 95%)',
   },
   box: {
     marginLeft: theme.spacing(30),
   },
 
   title: {
-    fontSize: 24,
+    marginRight: theme.spacing(25),
     padding: theme.spacing(2),
     color: theme.palette.primary.contrastText
   },
@@ -94,8 +94,8 @@ function Main() {
     <Box className={classes.root}>
       <Toolbar />
       <Box className={classes.box}>
-        <Typography className={classes.title}>
-          Albuns
+        <Typography align={'center'} variant={'h2'} className={classes.title}>
+          <b>Albuns</b>
         </Typography>
         <Grid spacing={4} container>
           {album.map((a, index) => (

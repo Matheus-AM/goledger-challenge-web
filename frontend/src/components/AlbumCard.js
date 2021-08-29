@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Card, CardActions, CardContent, makeStyles, Typography } from '@material-ui/core';
+import { Box, Button, Card, CardActions, CardContent, makeStyles, Typography } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     box: {
@@ -35,6 +35,7 @@ function AlbumCard(props) {
     return (
         <>
             {props.album ? (
+                <Box boxShadow={8}>
                 <Card className={classes.card}>
                     <CardContent>
                         <Typography variant="h5" component="h2">
@@ -44,16 +45,16 @@ function AlbumCard(props) {
                             {author.name}
                         </Typography>
                         <Typography>
-                            {'Genre: ' + props.album.genre}
+                            <b>Genre:</b>  {props.album.genre}
                         </Typography>
                         <Typography>
-                            {'Tracks: ' + props.album.nTracks}
+                            <b>Tracks:</b>  {props.album.nTracks}
                         </Typography>
                         <Typography>
-                            {'Release year: ' + props.album.year}
+                            <b>Release year:</b> {props.album.year}
                         </Typography>
                         <Typography>
-                            {'Streaming plataforms:'}
+                            <b>Streaming plataforms:</b>
                         </Typography>
                         {streamings.map((s, index)=>(
                         <Typography key={index}>
@@ -63,18 +64,18 @@ function AlbumCard(props) {
                         
                     </CardContent>
                     <CardActions>
-                        <Button onClick={handleExpandClick} size="small">Learn More</Button>
+                        <Button onClick={handleExpandClick} variant="contained" color="primary" size="small">Learn More</Button>
                     </CardActions>
                     {expanded ? (
                         <CardContent>
                             <Typography >
-                                {'Author: ' + author.name}
+                                <b>Author:</b> {author.name}
                             </Typography>
                             <Typography >
-                                {'Nationality: ' + author.location}
+                                <b>Nationality:</b> {author.location}
                             </Typography>
                             <Typography >
-                                {'About: ' + author.description}
+                                <b>About:</b> {author.description}
                             </Typography>
                         </CardContent>
                      ) : (
@@ -82,6 +83,7 @@ function AlbumCard(props) {
                          </>
                          )}
                 </Card>
+                </Box>
             )
                 : (<></>)
             }
