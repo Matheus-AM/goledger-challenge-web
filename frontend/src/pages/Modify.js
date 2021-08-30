@@ -1,7 +1,6 @@
 import { Box, Button, Container, Grid, makeStyles, TextField, Toolbar, Typography } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import FormText from '../components/FormText';
-import LabelFilter from '../components/LabelFilter';
 import api from '../services/api';
 
 
@@ -55,10 +54,19 @@ function Modify() {
   const [artist, setArtist] = useState([{}]);
   const [album, setAlbum] = useState([{}]);
   const [streaming, setStreaming] = useState([{}]);
-  const [create, setCreate] = useState("Add");
+  const [create, setCreate] = useState("");
   const [active, setActive] = useState("Artist");
   const [elem, setElem] = useState("");
   const [atributes, setAtributes] = useState("");
+
+  const [label1, setLabel1] = useState();
+  const [label2, setLabel2] = useState();
+  const [label3, setLabel3] = useState();
+  const [label4, setLabel4] = useState();
+  const [label5, setLabel5] = useState();
+  const [label6, setLabel6] = useState();
+  const [label7, setLabel7] = useState();
+
   const fields = [["Add", "Edit", "Delete"], ["Artist", "Album", "Streaming Service"]];
 
   const generateNames = () => {
@@ -135,10 +143,30 @@ function Modify() {
   }, []);
 
   useEffect(() => {
-    
+    setAtributes(elementDecide())
+  }, [active, create]);
 
-  }, [elements]);
-
+  const handleChange1 = (event) => {
+    setLabel1(event.target.value);
+  }
+  const handleChange2 = (event) => {
+    setLabel2(event.target.value);
+  }
+  const handleChange3 = (event) => {
+    setLabel3(event.target.value);
+  }
+  const handleChange4 = (event) => {
+    setLabel4(event.target.value);
+  }
+  const handleChange5 = (event) => {
+    setLabel5(event.target.value);
+  }
+  const handleChange6 = (event) => {
+    setLabel6(event.target.value);
+  }
+  const handleChange7 = (event) => {
+    setLabel7(event.target.value);
+  }
 
 
   const handleSubmit = (event) => {
@@ -148,52 +176,77 @@ function Modify() {
     })[0]
 
 
-    alert('Um nome sera enviado: ' + actual);
-
-
     if (create === 'Add') {
-      const data = {
+      const labels = [label1, label2, label3, label4, label5, label6, label7]
+
+      let data = {
         "asset": [
           {
             "@assetType": actual,
-            "name": "Ximbinha",
-            "location": "Brazil",
-            "description": "Guitar God é o melhor guitar shredder do mundo e copiou do Deus Metal criou o Heavy Metal, seus solos chegam a incrível marca de 0,472 notas por minuto.",
+
           }
         ]
       };
+      atributes.map((atrib, i)=>{if(labels[i]) data.asset[0][atrib] = labels[i] }) 
       api.post("invoke/createAsset", data)
+      .then()
+        .catch((err) => {
+          console.error(err);
+        })
     }
     else if (create === 'Edit') {
-      const data = {
+      let nomeSelecionado = "";
+
+      if(actual === 'artist'){
+        nomeSelecionado = artist.find((o) => o.name === elem.toString());
+      }
+      else if(actual === 'album')
+        nomeSelecionado = album.find((o) => o.nome === elem.toString());
+      else
+        nomeSelecionado = streaming.find((o) => o.nome === elem.toString());
+        
+      let data = {
         "update": {
           "@assetType": actual,
-          "name": "Ximbinha",
-          "location": "Brazil",
-
         }
       };
+
+      nomeSelecionado[atributes] = label1;
+      
+      Object.keys(nomeSelecionado).map((atrib)=>{ data.update[atrib] = nomeSelecionado[atrib] }) 
       api.put("invoke/updateAsset", data)
+      .then()
+      .catch((err) => {
+        console.error(err);
+      })
 
     }
     else if (create === 'Delete') {
-      const data = {
+
+      let nomeSelecionado = "";
+
+      if(actual === 'artist'){
+        nomeSelecionado = artist.find((o) => o.name === elem.toString());
+      }
+      else if(actual === 'album')
+        nomeSelecionado = album.find((o) => o.nome === elem.toString());
+      else
+        nomeSelecionado = streaming.find((o) => o.nome === elem.toString());
+        
+      let data = {
         "key": {
           "@assetType": actual,
-          "name": "Ximbinha",
-          "location": "Brazil",
         }
       }
+      atributes.map((atrib, i)=>{data.key[atrib] = nomeSelecionado[atrib] }) 
+
       api.post("invoke/deleteAsset", data)
+      .then()
+      .catch((err) => {
+        console.error(err);
+      })
     }
     event.preventDefault();
-  };
-
-
-  const makeHalf = (list) => {
-    const h = 4;
-    const half = list.splice(0, h);
-    return [half, list];
   };
 
 
@@ -222,7 +275,7 @@ function Modify() {
                 </Box>
               </Box>
               <Box className={classes.submit}>
-                <Button type={'submit'} variant={'outlined'} color={'inherit'} >{create}</Button>
+                {create ? (<Button type={'submit'} variant={'outlined'} color={'inherit'} >{create}</Button>):(<></>)}
               </Box>
             </Box>
             <Box display='flex' justifyContent='center' className={classes.teste} alignItems='center'>
@@ -242,21 +295,44 @@ function Modify() {
                     <FormText change={setAtributes} value={atributes} elements={elementDecide()} />
                   </Box>
                   <Box display='flex' alignItems='flex-end'>
-                    <TextField className={classes.textBox} id="outlined-basic" label="New" variant="outlined" />
+                    <TextField onChange={handleChange1} className={classes.textBox} label="New" variant="outlined" />
                   </Box>
                 </Box>
 
               ) : create === 'Add' ? (
                 <Box display='flex' flexDirection='column' alignItems='center'>
-                  {makeHalf(elementDecide()).map((obj, indexi) => (
-                    <Box display='flex' key={indexi} >
-                      {obj.map((el, indexj) => (
-                        <>
-                          <LabelFilter key={indexj} content={el} value={true} type={'boolean'} />
-                        </>
-                      ))}
-                    </Box>
-                  ))}
+                  <Box  display='flex' alignItems='center' >
+                    {atributes[0] ? (<Box display='flex' justifyContent='center' alignItems='flex-end'>
+                      <Typography className={classes.titleBox} >{atributes[0]}</Typography>
+                      <TextField onChange={handleChange1} className={classes.textBox} label="New" variant="outlined" />
+                    </Box>):(<></>)}
+                    {atributes[1] ? ( <Box display='flex' justifyContent='center' alignItems='flex-end'>
+                      <Typography className={classes.titleBox} >{atributes[1]}</Typography>
+                      <TextField onChange={handleChange2} className={classes.textBox} label="New" variant="outlined" />
+                    </Box>):(<></>)}
+                    {atributes[2] ? (<Box display='flex' justifyContent='center' alignItems='flex-end'>
+                      <Typography className={classes.titleBox} >{atributes[2]}</Typography>
+                      <TextField  onChange={handleChange3} className={classes.textBox} label="New" variant="outlined" />
+                    </Box>):(<></>)}
+                    {atributes[3] ? (<Box display='flex' justifyContent='center' alignItems='flex-end'>
+                      <Typography className={classes.titleBox} >{atributes[3]}</Typography>
+                      <TextField onChange={handleChange4} className={classes.textBox} label="New" variant="outlined" />
+                    </Box>):(<></>)}
+                  </Box>
+                  <Box  display='flex' alignItems='center' >
+                  {atributes[4] ? (<Box display='flex' justifyContent='center' alignItems='flex-end'>
+                      <Typography className={classes.titleBox} >{atributes[4]}</Typography>
+                      <TextField onChange={handleChange5} className={classes.textBox} label="New" variant="outlined" />
+                    </Box>):(<></>)}
+                    {atributes[5] ? (<Box display='flex' justifyContent='center' alignItems='flex-end'>
+                      <Typography className={classes.titleBox} >{atributes[5]}</Typography>
+                      <TextField onChange={handleChange6} className={classes.textBox} label="New" variant="outlined" />
+                    </Box>):(<></>)}
+                    {atributes[6] ? (<Box display='flex' justifyContent='center' alignItems='flex-end'>
+                      <Typography className={classes.titleBox} >{atributes[6]}</Typography>
+                      <TextField onChange={handleChange7} className={classes.textBox} label="New" variant="outlined" />
+                    </Box>):(<></>)}
+                  </Box>
                 </Box>)
                 : (<></>)}
             </Box>
